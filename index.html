@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TraceTheStuff</title>
+    <style>
+        :root {
+            --bg-color: #0f1115;
+            --card-bg: #1a1d24;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent-toxin: #11a0b3;
+            --accent-break: #b08527;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(to right, #ffffff, #9ca3af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid #2d3139;
+            border-radius: 16px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Project-specific hover glows */
+        .card.toxin:hover {
+            border-color: var(--accent-toxin);
+            box-shadow: 0 12px 30px rgba(17, 160, 179, 0.15);
+        }
+
+        .card.break:hover {
+            border-color: var(--accent-break);
+            box-shadow: 0 12px 30px rgba(176, 133, 39, 0.15);
+        }
+
+        .card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 3px solid transparent;
+            transition: var(--transition);
+        }
+
+        .card.toxin:hover img {
+            border-color: var(--accent-toxin);
+        }
+
+        .card.break:hover img {
+            border-color: var(--accent-break);
+        }
+
+        .card h2 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        footer {
+            margin-top: auto;
+            padding-top: 4rem;
+            color: #4b5563;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>TraceTheStuff</h1>
+        <p>A minimalist hub gathering interactive analytical utilities, environmental tracking modules, and simulation sandboxes.</p>
+    </header>
+
+    <main class="grid">
+        
+        <!-- TraceTheToxin Card -->
+        <a href="https://strale1988.github.io/TraceTheToxin/" class="card toxin" target="_blank" rel="noopener">
+            <img src="TraceTheToxin.png" alt="TraceTheToxin Icon">
+            <h2>TraceTheToxin</h2>
+            <p>Analyze contamination distributions, track hazardous dispersion grids, and isolate safety vectors.</p>
+        </a>
+
+        <!-- TraceTheBreak Card -->
+        <a href="https://strale1988.github.io/TraceTheBreak/" class="card break" target="_blank" rel="noopener">
+            <img src="TraceTheBreak.png" alt="TraceTheBreak Icon">
+            <h2>TraceTheBreak</h2>
+            <p>Diagnose structural anomalies, trace infrastructure system faults, and map failure points.</p>
+        </a>
+
+        <!-- FUTURE LINKS: You can easily copy/paste the block below to add more later -->
+        <!-- 
+        <a href="#" class="card" target="_blank" rel="noopener">
+            <img src="placeholder.jpg" alt="Future Project">
+            <h2>TraceTheNext</h2>
+            <p>Description of your next awesome utility goes right here.</p>
+        </a> 
+        -->
+
+    </main>
+
+    <footer>
+        &copy; TraceTheStuff
+    </footer>
+
+</body>
+</html>
