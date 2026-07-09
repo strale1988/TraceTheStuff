@@ -42,14 +42,26 @@
             margin-bottom: 3rem;
         }
 
+        .title-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        }
+
+        .title-logo {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
         header h1 {
             font-size: 2.5rem;
             font-weight: 700;
             letter-spacing: -0.05em;
             margin-bottom: 0.75rem;
-            background: linear-gradient(to right, #ffffff, #9ca3af);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #9ca3af; /* or #11a0b3 */
         }
 
         header p {
@@ -151,7 +163,10 @@
 <body>
 
     <header>
-        <h1>TraceTheStuff</h1>
+        <div class="title-wrapper">
+            <img src="icons/TraceTheToxin.png" alt="TraceTheToxin Logo" class="title-logo">
+            <h1>TraceTheToxin</h1>
+        </div>
     </header>
 
     <main class="grid">
@@ -184,19 +199,10 @@
             <p>Track your cycling routes, analyze performance metrics, and discover new trails.</p>
         </a>
 
-        <!-- FUTURE LINKS: You can easily copy/paste the block below to add more later -->
-        <!-- 
-        <a href="#" class="card" target="_blank" rel="noopener">
-            <img src="placeholder.jpg" alt="Future Project">
-            <h2>TraceTheNext</h2>
-            <p>Description of your next awesome utility goes right here.</p>
-        </a> 
-        -->
-
     </main>
 
     <footer>
-        &copy; TraceTheStuff
+        &copy; StrApps
     </footer>
 
 </body>
