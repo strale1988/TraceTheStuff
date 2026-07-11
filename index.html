@@ -381,6 +381,12 @@
         const installCancel = document.getElementById('installCancel');
         const installConfirm = document.getElementById('installConfirm');
 
+        // If this page is being loaded from inside the TraceTheStuff app itself,
+        // there's no point offering to install it - hide the badge entirely.
+        if (navigator.userAgent.includes('TraceTheStuffApp')) {
+            installBadge.style.display = 'none';
+        }
+
         installBadge.addEventListener('click', () => {
             installModalOverlay.classList.add('open');
         });
