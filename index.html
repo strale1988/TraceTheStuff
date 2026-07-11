@@ -39,7 +39,7 @@
         header {
             text-align: center;
             max-width: 600px;
-            margin-bottom: 3rem;
+            margin-bottom: 1.5rem;
         }
 
         .title-wrapper {
@@ -81,29 +81,155 @@
             display: inline-flex;
             justify-content: center;
             align-items: center;
-            padding: 2rem 0;
-        }
-
-        .hero-watermark {
-            position: absolute;
-            width: 180px;
-            height: 180px;
-            object-fit: contain;
-            opacity: 0.04;
-            filter: blur(1px);
-            pointer-events: none;
-            user-select: none;
-            z-index: 0;
+            padding: 0.75rem 0;
         }
 
         .hero-title h1 {
             position: relative;
             z-index: 1;
-            font-size: 2.8rem;
+            font-size: 1.9rem;
             font-weight: 700;
-            color: #fff;
+            color: #9ca3af;
             letter-spacing: -0.05em;
             margin: 0;
+        }
+
+        /* Pulsating corner badge that offers the app install */
+        .install-badge {
+            position: fixed;
+            top: 18px;
+            left: 18px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            z-index: 100;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+
+        .install-badge img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.15);
+        }
+
+        .install-badge::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--accent-way);
+            z-index: 1;
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(1);
+                opacity: 0.55;
+            }
+            70% {
+                transform: scale(1.9);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1.9);
+                opacity: 0;
+            }
+        }
+
+        .install-badge:hover img {
+            box-shadow: 0 0 0 2px var(--accent-way);
+        }
+
+        /* Install confirmation modal */
+        .install-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .install-modal-overlay.open {
+            display: flex;
+        }
+
+        .install-modal {
+            background: var(--card-bg);
+            border: 1px solid #2d3139;
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 320px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .install-modal img {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        .install-modal h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .install-modal p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .install-modal-actions {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+
+        .install-modal-actions button {
+            flex: 1;
+            padding: 0.65rem 1rem;
+            border-radius: 10px;
+            border: 1px solid #2d3139;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .install-btn-confirm {
+            background: var(--accent-way);
+            color: #fff;
+            border-color: var(--accent-way) !important;
+        }
+
+        .install-btn-confirm:hover {
+            filter: brightness(1.1);
+        }
+
+        .install-btn-cancel {
+            background: transparent;
+            color: var(--text-main);
+        }
+
+        .install-btn-cancel:hover {
+            background: #22262f;
         }
         .card {
             background-color: var(--card-bg);
@@ -190,9 +316,12 @@
 </head>
 <body>
 
+    <button class="install-badge" id="installBadge" aria-label="Install TraceTheStuff app">
+        <img src="icons/TraceTheStuff.png" alt="Install TraceTheStuff">
+    </button>
+
     <header>
         <div class="hero-title">
-            <img src="icons/TraceTheStuff.png" alt="" class="hero-watermark">
             <h1>TraceTheStuff</h1>
         </div>
     </header>
@@ -232,6 +361,50 @@
     <footer>
         &copy; StrApps
     </footer>
+
+    <!-- Install confirmation modal -->
+    <div class="install-modal-overlay" id="installModalOverlay">
+        <div class="install-modal">
+            <img src="icons/TraceTheStuff.png" alt="">
+            <h3>Install TraceTheStuff?</h3>
+            <p>This will download the TraceTheStuff Android app (.apk) to your device. You'll need to open it and allow the install afterwards.</p>
+            <div class="install-modal-actions">
+                <button class="install-btn-cancel" id="installCancel">Cancel</button>
+                <button class="install-btn-confirm" id="installConfirm">Install</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const installBadge = document.getElementById('installBadge');
+        const installModalOverlay = document.getElementById('installModalOverlay');
+        const installCancel = document.getElementById('installCancel');
+        const installConfirm = document.getElementById('installConfirm');
+
+        installBadge.addEventListener('click', () => {
+            installModalOverlay.classList.add('open');
+        });
+
+        installCancel.addEventListener('click', () => {
+            installModalOverlay.classList.remove('open');
+        });
+
+        installModalOverlay.addEventListener('click', (e) => {
+            if (e.target === installModalOverlay) {
+                installModalOverlay.classList.remove('open');
+            }
+        });
+
+        installConfirm.addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.href = 'TraceTheStuff.apk';
+            link.download = 'TraceTheStuff.apk';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            installModalOverlay.classList.remove('open');
+        });
+    </script>
 
 </body>
 </html>
