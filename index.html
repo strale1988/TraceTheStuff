@@ -94,143 +94,6 @@
             margin: 0;
         }
 
-        /* Pulsating corner badge that offers the app install */
-        .install-badge {
-            position: fixed;
-            top: 18px;
-            left: 18px;
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            z-index: 100;
-            cursor: pointer;
-            background: transparent;
-            border: none;
-            padding: 0;
-        }
-
-        .install-badge img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            display: block;
-            position: relative;
-            z-index: 2;
-            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.15);
-        }
-
-        .install-badge::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: var(--accent-way);
-            z-index: 1;
-            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-
-        @keyframes pulse-ring {
-            0% {
-                transform: scale(1);
-                opacity: 0.55;
-            }
-            70% {
-                transform: scale(1.9);
-                opacity: 0;
-            }
-            100% {
-                transform: scale(1.9);
-                opacity: 0;
-            }
-        }
-
-        .install-badge:hover img {
-            box-shadow: 0 0 0 2px var(--accent-way);
-        }
-
-        /* Install confirmation modal */
-        .install-modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 200;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .install-modal-overlay.open {
-            display: flex;
-        }
-
-        .install-modal {
-            background: var(--card-bg);
-            border: 1px solid #2d3139;
-            border-radius: 16px;
-            padding: 2rem;
-            max-width: 320px;
-            width: 90%;
-            text-align: center;
-        }
-
-        .install-modal img {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 1rem;
-        }
-
-        .install-modal h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .install-modal p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .install-modal-actions {
-            display: flex;
-            gap: 0.75rem;
-            justify-content: center;
-        }
-
-        .install-modal-actions button {
-            flex: 1;
-            padding: 0.65rem 1rem;
-            border-radius: 10px;
-            border: 1px solid #2d3139;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .install-btn-confirm {
-            background: var(--accent-way);
-            color: #fff;
-            border-color: var(--accent-way) !important;
-        }
-
-        .install-btn-confirm:hover {
-            filter: brightness(1.1);
-        }
-
-        .install-btn-cancel {
-            background: transparent;
-            color: var(--text-main);
-        }
-
-        .install-btn-cancel:hover {
-            background: #22262f;
-        }
         .card {
             background-color: var(--card-bg);
             border: 1px solid #2d3139;
@@ -306,6 +169,59 @@
             font-weight: 300;
         }
 
+        .badge-soon {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-muted);
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.65rem;
+            border-radius: 999px;
+            border: 1px solid #2d3139;
+        }
+
+        .card.disabled {
+            cursor: default;
+            opacity: 0.55;
+        }
+
+        .card.disabled:hover {
+            transform: none;
+            box-shadow: none;
+            border-color: #2d3139;
+        }
+
+        .card.disabled img {
+            filter: grayscale(1);
+        }
+
+        .card.disabled:hover img {
+            border-color: transparent;
+        }
+
+        .summary {
+            max-width: 640px;
+            width: 100%;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid #2d3139;
+            text-align: center;
+        }
+
+        .summary p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        .summary p + p {
+            margin-top: 0.75rem;
+        }
+
         footer {
             margin-top: auto;
             padding-top: 4rem;
@@ -316,10 +232,6 @@
 </head>
 <body>
 
-    <button class="install-badge" id="installBadge" aria-label="Install TraceTheStuff app">
-        <img src="icons/TraceTheStuff.png" alt="Install TraceTheStuff">
-    </button>
-
     <header>
         <div class="hero-title">
             <h1>TraceTheStuff</h1>
@@ -329,14 +241,14 @@
     <main class="grid">
         
         <!-- TraceTheBreak Card -->
-        <a href="https://strale1988.github.io/TraceTheBreak/" class="card break" target="_blank" rel="noopener">
+        <a href="https://break.tracethestuff.com/" class="card break" target="_blank" rel="noopener">
             <img src="icons/TraceTheBreak.png" alt="TraceTheBreak Icon">
             <h2>TraceTheBreak</h2>
             <p>Diagnose structural anomalies, trace infrastructure system faults, and map failure points.</p>
         </a>
 
         <!-- TraceTheToxin Card -->
-        <a href="https://strale1988.github.io/TraceTheToxin/" class="card toxin" target="_blank" rel="noopener">
+        <a href="https://toxin.tracethestuff.com/" class="card toxin" target="_blank" rel="noopener">
             <img src="icons/TraceTheToxin.png" alt="TraceTheToxin Icon">
             <h2>TraceTheToxin</h2>
             <p>Analyze contamination distributions, track hazardous dispersion grids, and isolate safety vectors.</p>
@@ -344,75 +256,31 @@
 
 
         
-        <!-- TraceMyWay Card -->
-        <a href="https://strale1988.github.io/TraceMyWay/" class="card way" target="_blank" rel="noopener">
+        <!-- TraceMyWay Card (coming soon) -->
+        <div class="card way disabled" aria-disabled="true">
+            <span class="badge-soon">Coming soon</span>
             <img src="icons/TraceMyWay.png" alt="TraceMyWay Icon">
             <h2>TraceMyWay</h2>
             <p>Explore your journey, visualize your path, and share your adventures.</p>
-        </a>
+        </div>
 
-        <!-- TraceMyBike Card -->
-        <a href="https://strale1988.github.io/TraceMyBike/" class="card bike" target="_blank" rel="noopener">
+        <!-- TraceMyBike Card (coming soon) -->
+        <div class="card bike disabled" aria-disabled="true">
+            <span class="badge-soon">Coming soon</span>
             <img src="icons/TraceMyBike.png" alt="TraceMyBike Icon">
             <h2>TraceMyBike</h2>
             <p>Track your cycling routes, analyze performance metrics, and discover new trails.</p>
-        </a>
+        </div>
 
     </main>
+
+    <section class="summary">
+        <p>TraceTheStuff is a small suite of independent tracing and diagnostic tools built by StrApps. Each app focuses on one job: TraceTheBreak maps structural and infrastructure faults, and TraceTheToxin tracks contamination and hazard dispersion. TraceMyWay and TraceMyBike, for journey and cycling tracking, are on the way.</p>
+    </section>
 
     <footer>
         &copy; StrApps
     </footer>
-
-    <!-- Install confirmation modal -->
-    <div class="install-modal-overlay" id="installModalOverlay">
-        <div class="install-modal">
-            <img src="icons/TraceTheStuff.png" alt="">
-            <h3>Install TraceTheStuff?</h3>
-            <p>This will download the TraceTheStuff Android app (.apk) to your device. You'll need to open it and allow the install afterwards.</p>
-            <div class="install-modal-actions">
-                <button class="install-btn-cancel" id="installCancel">Cancel</button>
-                <button class="install-btn-confirm" id="installConfirm">Install</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const installBadge = document.getElementById('installBadge');
-        const installModalOverlay = document.getElementById('installModalOverlay');
-        const installCancel = document.getElementById('installCancel');
-        const installConfirm = document.getElementById('installConfirm');
-
-        // If this page is being loaded from inside the TraceTheStuff app itself,
-        // there's no point offering to install it - hide the badge entirely.
-        if (navigator.userAgent.includes('TraceTheStuffApp')) {
-            installBadge.style.display = 'none';
-        }
-
-        installBadge.addEventListener('click', () => {
-            installModalOverlay.classList.add('open');
-        });
-
-        installCancel.addEventListener('click', () => {
-            installModalOverlay.classList.remove('open');
-        });
-
-        installModalOverlay.addEventListener('click', (e) => {
-            if (e.target === installModalOverlay) {
-                installModalOverlay.classList.remove('open');
-            }
-        });
-
-        installConfirm.addEventListener('click', () => {
-            const link = document.createElement('a');
-            link.href = 'TraceTheStuff.apk';
-            link.download = 'TraceTheStuff.apk';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            installModalOverlay.classList.remove('open');
-        });
-    </script>
 
 </body>
 </html>
